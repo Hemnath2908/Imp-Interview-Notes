@@ -1,0 +1,117 @@
+Spring And SpringBoot Annotations
+
+1. @SpringBootApplication -> Combination of 3 annotations
+		@EnableAutoConfiguration -> automatically configures the spring based on the jar dependency that we defined in the pom.xml file 
+				ex: If we define H2 dependency in pom.xml but we didnt configure any bean then @EnableAutoConfiguration will configures for us
+		@ComponentScan -> It will scan the root and base packages
+		@Configuration -> used for java based configuration
+
+2. Stereotype Annotations
+	1. @Component - Main annotations - allows spring to detect all our custom beans. simply spring will scan all the classes in our application which is annotated with @Component, initiatance them and inject the specified dependencies with them
+	2. @Service - specialization of @Component - Business Layer
+	3. @RestController / @Controller - specialization of @Component - Web Logics layer
+	4. @Repository - specialization of @Component - DAO Layer
+	
+These annotations are used to create the bean inside the application context.so the spring container will manage the entire life cycle of that bean
+
+3. Spring core related annotations
+	1. @Configuration - It indicates that the class has @Bean definition methods
+	2. @Bean - create a custom bean of an object 
+	3. @Autowired - The spring will inject the dependencies automatically into application context
+	4. @Qualifier - When we create more than one bean of the same type and wire only one of them with a property we can use @Qualifier along with @Autowired to remove the ambiguity by specifying which exact bean should wired 
+	5. @Lazy - create a bean on demand. It is annotated top of the class name
+	6. @Value - when we want to load any data from properties file we can use this annotation -> @Value("${key from properties files}")
+	7. @Scope - scope of bean such as singleton , prototype, request and session
+	request -> @Scope(value=WebApplicationContext.Request, proxyType = scopedProxyMode.Target_class)
+	
+	8. @ConfigurationProperties
+	9. @Profile - spring.profile.active = qa and @Profile(""qa)
+	10. @PropertySource - to load custom propert file to get value  -> @PropertySource("classpath:filename.properties")
+	11. @Primary
+	
+4. Rest API related annotations
+	1. RestController - It is one of the stereotype annotation which define the class to perform some rest operations
+	2. RequestMapping - It is old type annotation. It used to define what http methods u want to exposture into ur endpoint. 
+						We need to define the httpmethod and consumes and produces. instead of this we can use GetMapping/PostMapping/PutMapping/DeleteMapping
+		Syntax -> @RequestMapping(value = "/save", method = RequestMethod.POST, consumes = "application/json", produces="application/json")
+	3. GetMapping - It inherited from RequestMapping annotation. If u want to fetch/get any data from db u can go for GetMapping
+	4. PostMapping - It inherited from RequestMapping annotation. If u want to save or create any table or insert operations we can use PostMapping
+	5. putMapping - It inherited from RequestMapping annotation. to perform Update operations in db
+	6. DeleteMapping - It inherited from RequestMapping annotation. To perform Delete operations in db
+	7. RequestBody - If u want to perform post operations we can use RequestBody. It will automatically deserialize the body of http request into the model/ String. It is used
+                 	in PostMapping
+					Syntax ->  public Student save(@RequestBody Student student)
+	8. PathVariable - It is used to pass the payload/input into the request url. It is used in the GetMapping
+							   GetMapping("getResult/{id}")
+					Syntax ->  public Student getResult(@PathVariable Student student)
+	9. RequestParam - same as PathVariable ex : localhost:/idByReq?id=109
+				    Syntax ->  public Student getResult(@RequestParam("id") Student student)
+	10. @ControllerAdvice and @ExceptionHandler - Used to handle the exception
+	
+Diff between RequestParam and PathVariable
+	RequestParam will not force u to give the input, whereas PathVariable will force u to give the input 
+	For Eg -> In PathVariable, if we pass the request as http://localhost:16160/getResult/20 over http://localhost:16160/getResult/20 -> we need to give the input as 20 otherwise it will throw 404 exception
+	In RequestParam if dont pass any input also it will not throw any exception
+	
+5. Spring Data JPA related annotations
+	1. @Entity - To define the class to act as as Database 
+	2. @Table  - To define the name of the table
+	3. @Id  - optional - To specify the unique key
+	3. @GeneratedValue - auto generated value
+	3. @Column - to define the column name 
+	4. @Transactional - rollback  -> @Transactional(Isolation = "" , Propogation =)
+
+	Entity class relationship
+		1. One to One
+		2. One to Many
+		3. Many to One
+		4. Many to Many
+
+
+@AllArgsConstructor generates a constructor requiring argument for every field in the annotated class
+@NoArgsConstructor generates a constructor with no parameter
+
+@Getter and @Setter: Generates setter and getter methods.
+@ToString: Generates toString method
+@NoArgsConstructor and @AllArgsConstructor: Generates constructors that take no argument and one argument for every field.
+@EqualsAndHashCode: Generates hashCode and equals implementations from the fields of your object.
+@RequiredArgsConstructor: Generates one argument per final / non-null field.
+@Data: A shortcut for @ToString, @EqualsAndHashCode, @Getter on all fields, and @Setter on all non-final fields and @RequiredArgsConstructor.
+
+
+
+Employee 
+	Guid EmpId EmpName firstName lastName Email phoneNumber 
+Employee_P
+	Guid EmpGuid Project Manager
+	
+
+Spring Boot Actuator ?
+	It is one of the feature available in spring boot
+	By using actuator we can monitor and manage our application
+	   What is health of our application
+	   How many means are loaded by our application
+	   What is heap info of our application
+	   How many threads are running in our application
+	 spring-boot-starter-actuator -> dependency
+	 management.endpoints.web.exposure.include = * -> to exposure all the endpoints
+	 at default it will show only health
+	 
+	 localhost:9090/actuator/health / localhost:9090/actuator/info
+	  To exclude the endpoint 
+	  management.endpoints.web.exposure.exclude = bean
+	  
+	  
+	  
+  
+	 
+	 
+	 
+	 
+
+
+
+
+
+	
+

@@ -1,0 +1,797 @@
+microservices are basically an SDLC in which large applications are build as a collection of small functional modules
+Easy to enhance the update and interact fast
+Independent production deployment
+
+
+S.No.	Spring																			
+1.	Spring is an open-source lightweight framework widely used to develop enterprise applications.	
+2.	The most important feature of the Spring Framework is dependency injection.	
+3. 	It helps to create a loosely coupled application.	
+4. 	To run the Spring application, we need to set the server explicitly.	
+5.	To run the Spring application, a deployment descriptor is required.	
+6.	To create a Spring application, the developers write lots of code.	
+7.	It doesn’t provide support for the in-memory database.	
+8.	Developers need to write boilerplate code for smaller tasks.	
+9.	Developers have to define dependencies manually in the pom.xml file.	
+
+				Spring Boot
+Spring Boot is built on top of the conventional spring framework, widely used to develop REST APIs.
+The most important feature of the Spring Boot is Autoconfiguration.
+It helps to create a stand-alone application.
+Spring Boot provides embedded servers such as Tomcat and Jetty etc.
+There is no requirement for a deployment descriptor.
+It reduces the lines of code.
+It provides support for the in-memory database such as H2.
+In Spring Boot, there is reduction in boilerplate code.
+pom.xml file internally handles the required dependencies
+
+
+			deployment descriptor[Web.xml]
+A web application's deployment descriptor describes the classes, resources and configuration of the application and how the web server uses them to serve web requests.
+
+			boilerplate code
+sections of code that are repeated in multiple places with little to no variation
+
+			API
+API stands for Application Program Interface, and is basically a way for your program to interact with another program.
+
+		Spring MVC
+Fast , Easy and seperation of concern
+MVC is a design pattern. which seperates the application into 3 different ways
+	1. Model -> to represent the data
+	2. View -> user can interact with the view
+	3. Controller -> communicate with the business logic and prepare the view and model
+
+Basic Flow :
+
+Servlet dispatcher -> Handler Mapping -> Handler Adapter -> Controller -> Business Logic -> [DAO -> DB]
+	Controller -> Handler Adapter[view name] -> Servlet dispatcher[http request] -> view Resolver
+
+Once user click any button in browser or performed any action servlet dispatcher process the request to the Handler mapping. Handler Mapping will find which controller to call. Handler Adapter will call the controller and Controller will perform some business logics and return the view name[that is which front end to call]. Handler adapter will wrap the model and view together and  return to the servlet dispatcher. servlet dispatcher will convert the wrapped model and view into GUI through view Resolver.
+\
+1. what are static blocks and static initializers in Java ?
+. Static blocks gets executed exactly once when the class is loaded
+. Static blocks are executed even before the constructors are executed.
+
+2.  How to call one constructor from the other constructor
+		Using this() keyword
+		this must be the first statement in the constructor
+		we cannot use two this() methods in the constructor
+
+3. What is method overriding in java ?
+If we have methods with same signature (same name, same signature, same return type) in super class
+and subclass then we say
+subclass method is overridden by superclass. 
+
+4. Agile methodology?[long term projects] 
+It is an incremental or iterative process.
+Understanding the requirent -> start developing the basic requirement and tested and demostrate to the customer or client -> and then enhance based on their feedback
+Work based on the sprint
+
+5. What is a scrum master?
+Scrum masters are the facilitators of scrum, the lightweight agile framework with a focus on time-boxed iterations called sprints.
+Product owner ===>       Developers      ====>   customer
+
+In agile process once the developers completed the important features of an product, then product owner will demostrate to the customer for the feedback. customer will tell all the enhancement which is noted as product backlog 
+
+what is jenkins?
+Jenkins is a open-source automation tool for continous integration and continous deployment[CICD tool]
+It will pull the latest code from git and build and end to end test
+Scenario : Developers once pushed the code in git hib. jenkins will build that code and test that code using selenium. once testcases are success it will build as a package and posted it to the docker and from the running application in the docker will move to the server
+
+					IOC
+Spring IoC (Inversion of Control) Container is the core of Spring Framework. It creates the objects, configures and assembles their dependencies, manages their entire life cycle. The Container uses Dependency Injection(DI) to manage the components that make up the application.
+ It gets the information about the objects from a configuration file(XML) or Java Code or Java Annotations and Java POJO class.
+ These objects are called Beans. Since the Controlling of Java objects and their lifecycle is not done by the developers, hence the name Inversion Of Control.
+ There are 2 types of IoC containers:
+	BeanFactory 
+	ApplicationContext 
+
+6. What do you know about string?
+String is class available java lang package
+String is a final class. so it cant be extended
+String is immutable it means we cannot change its value once the object is created
+
+7. How do u create a string object?
+	2 ways to create a string object 
+		=> new keyword [String str = new String()]
+		=> declaring a variable [String str = "name"]
+		
+8. Do u know how String internal store its reference in memory?
+	String uses spl memory for restore string literals called String constant Pool
+	With new keyword => It will check that the string literal is already present or not in the String constant pool, If it is not present , then it will create a reference inside the String constant pool and also create the reference in the heap memory
+	Without new keyword => It will check that the string literal is already present or not in the String constant pool, If it is not present , then it will create a reference inside the String constant pool only.
+	
+String Builder And String Buffer
+	String Buffer is synchronized and thread safe
+	String Builder is non synchronized and not a thread safe
+synchronized  -> Thread concept it will wait until the current task gets end
+unsynchronized -> executed parallely
+
+
+
+9. Do u know how to create a custum immutable class?
+	=> It must be a final class 
+	=> Access specifiers must be private
+	=> should provide only getter method. there is no setter method
+
+10. Diff btw classNotFoundException and NoClassDefFoundError?
+	  = > An exception that occurs when u try to load a class at runtime using Class.getName(), if the mention class is not present it will class not found exception
+	
+	NoClassDefFoundError => An exception that occurs when the class is found at the compile time and which is missing at the runtime. then w=this exception will occurs
+
+11. What is an exception in java and to handle it?
+	An exception is a failure condition during the execution of a program
+	We handle it by using try catch block
+
+12. Types of Exceptions?
+	Checked Exceptions -> Exceptions which are checked by compiler itself -> Example[if we want to read a file ,at compile time itself it will suggest here exception might occur]
+	Unchecked Exceptions -> occurs at runtime -> Example[ArrayOutOfBoundExecption]
+	2 types in checked Exceptions -> fully checked exception -> fully check the parent and child class
+								 partially checked exception -> only checks the parent class
+	
+13. Is Finally block always executed ?
+	Finally block is always executed even if the exception occured.
+	In one scenario Finally will not execute. by using System.Exit(1) in try catch block, because it will terminate the running jvm 
+	
+14. What is Http?
+	Http is a protocol is to communicate between client to server model
+
+15.What are the http methods?
+	Post, Get, Put, Delete, Head, Option, Patch
+
+16. Diff between  GET and POST?
+	GET -> Data goes with URL. Not safe
+	Post -> Data goes with Request body . completely safe
+	
+17. What is JOINS and types of JOINS?
+	Joins is to combine two or tables to fetch more datas
+	Inner Joins -> to fetch common data 
+	Left Joins -> to fetch whole data from left table and common data from right table it is used
+	Right Join -> to fetch whole data from right table and common data from left table it is used
+	
+18. What are the Bean scope in spring?
+	Singleton -> single instance will be created per spring IOC container
+	Prototype -> multiplw instance will be created
+	request -> scope of the bean will be to the particular http request
+	session -> scope of the bean will be to the particular session
+	global -> scope of bean will be global to session
+	
+19. What is RESTFUL webservice ?
+	Rest is an architectural design pattern and it is used for building services that could be light wight, scalable and easy maintainable
+
+20. Rest services are stateless?
+	Because it supports the Http protocol - and http protocol is stateless. So rest is also stateless
+	Stateless means when you send request from the client to server, the server does not hold or store any info about the client
+
+21. things important in sending request?
+	Resource, Request Header, request body, responsebody, statuscode
+
+
+22. Diff between @Controller and @RestController
+@Controller is used to declare common web controllers which can return HTTP response but @RestController is used to create controllers for REST APIs which can return JSON.
+In Spring MVC, both @Controller and @RestController annotations are used to define web controllers as per MVC Design pattern. 
+A controller is responsible for handling HTTP request and returning HTTP response to client.
+@RestController instead of returning HTML, you will probably like to return JSON or XML 
+
+23. @RequestMapping and @GetMapping @ PostMapping @Bean 
+The @RequestMapping annotation is used to map requests to controllers methods. It has various attributes to match by URL, HTTP method, request parameters, headers, and media types.
+
+24. To build Rest APi what are all the annotations used?
+	@Entity  -> To Map the model[DAO] class to the database. over the model class
+	@RestController -> To indicate the java class as a controller
+	@RequestMapping -> label
+	@Autowired -> used to define a injection to our project. Used for DI concept
+	@PostMapping("/url") -> Http method -> to create 
+	@GetMapping("/url") -> Get method -> put mapping and delete mapping
+	@Service -> used as a service class. inside that we use all the business logics
+	@PathVariable("") -> used to capture the value we passed in the url
+	@Valid -> 
+	@RequestBody -> used to capture the object of the resource which we were passing to the client side
+
+24. How will u DO the CRUD operations?
+
+25. What is Lambda expression 
+	It is an annonymous function [a function/ method which has no name]
+ What is functional interface?
+ A function interface should have only one abstract method. other than that it may have n number of static methods and n number of default methods
+ 
+Tight coupling - > One object should depend on another object
+					If one object is modified its dependend object should also modify
+					reduces the flexiblity of code
+					Not recommended
+Loose Copling  -> One object should not depend on another object
+				  If one object is modified its dependend object should not modify
+Spring boot imp ques:
+
+1. What is spring?
+Spring a framework which is used to create a light weight[consume less memory] and loosely coupled enterprise application in java
+It provides pre defined API for data operations and rest ful web[integrating one appl to another] services and microservices and security
+It is mainly for develop back end application
+
+2. Features of spring?
+	1. Pre-defined Templates like JDBC Templates and hibernate templates
+	Templates are the classes which reduces the boiler plate code
+	2. Loose coupling - it can be implemented by using layers mechanism. If one module or layer is modified then it will not affect the another module is called loose coupling
+	3. Light weight 
+	4. easy to test - Junit
+	5. RAD - Rapid application Development
+
+3. Dependency Injection
+Dependency Injection is a mechanism which is used to inject the dependency class into dependent class
+Simply linking or injecting the object to the dependent class
+Basically, when we write any program sometimes its needed to create a object of some class, so dependency injection helped us to object creation process automatically by its own
+
+4. types of Dependency Injection [DI]
+	1. Constructor Injection - > object is created by using parameters constructor and values are injected
+	2. Setter Injection -> default constructor is used and setter method is called
+	3. Feild Injection -> New type of injection, used by @Autowired
+	4. Circular injection -> one class is depend on another class in a circular manner
+	5. Lookup method injection -> spl case , occurs in case of scope mechanism
+
+5. IOC in spring
+IOC stands for inversion of controller
+Basically the spring container uses dependency injection for managing application components by creating objects wiring them together along with configuring and managing their entire life cycle
+
+Types of IOC 
+	1. Bean Factory  - is a fatory class that contains a collection of beans. It instanciates the bean whenever asked by the client
+	2. Application Context - is interface is build on top of bean factory
+	
+	
+6. Spring configuration File?
+It is an xml file which contains the information of classes and how the class to be configured and linking with each other
+it is also called xml configuration file
+EX : <bean id="emp1" class="com.emp.service">
+		<property name ="empType">
+			<value>exort</value>
+			</property></bean>
+
+7. Spring bean? -> nothing but an object
+An object which is entirely controlled by the spring IOC container is called spring bean
+Basically it will created by the help of configuration code which is supply by user to IOC container
+
+8. Different between Constructor and setter injection ?
+	Constructor injection -> partial injection is not possible
+							if any modification new instance will be created
+							if bean have many property then we prefer constructor injection
+							it does not override the setter property
+	Setter injectection -> partial inject is possible
+							if any modification new instance will not created
+							if bean have few property then we prefer Setter injection
+							It override the constructor injectection
+
+9. Bean scope in spring
+Scope means how long the object is present in the container
+	1. Singleton - create only one object
+	2. Prototype - create a object whenever we creating with new keyword
+	3. Request - if a browser makes any req an object is created in the container once the response is commited the object will destroy in the container
+	4. Session - http session. simply login logout
+	
+10. Bean wiring?
+Bean wiring is simply linking two object
+When the bean are combined together inside the spring container is called bean wiring
+The spring container should know what beans are needed and how the beans are dependent each other while wiring
+
+11. Autowired in spring different modes it have?
+The spring framework can inject the dependencies automatically
+The IOC container will first detect those dependencies and relation between the beans and then it will inject automatically this process is called autowiring
+It have 5 modes	
+	1. No 
+	2. byName
+	3. byType
+	4. constructor
+	5. autodetect
+
+12. diff between @Autowired and @inject
+Both are used for same purpose @Autowired is used to auto wiring[inject dependencies automatically in spring framework
+Both annotations used in spring framework
+@Inject is a part of CDI (Context and Dependency Injection)
+
+13. Diff between @Componenet and @Bean
+@Component -> The class will be autodetect using class path scanning
+			  It is class level annotations
+			  configuration annotation is not required
+			  @Controller, @Service and @Repository are specialization in @Componenet
+@Bean -> used to explicitly creating a bean rather than spring automatically do it
+		 It is method level annotation
+		 Configuration annotation is required
+		 No specialization
+	
+14. Types of IOC container in spring
+	1. Bean Factory  - xml configuration
+	2. ApplicationContext - it supports multiple like annotation, multi container system 
+	
+15. use of @Required Annotations in spring
+	@Required is applied to bean property setter methods
+	It will annotate in the top of setter methods. used to if we dont set any value for setter methods means default will take null. but we use @Required it will all us to set the value for the setter method
+
+16. use of @Autowired in spring
+	It is used to link/inject two beans inside the Spring container
+	Mostly recommended using field injection
+	If we have service layer or repository layer or Entity layer we can link one layer with another then can use @Autowired
+	
+17. use of @Qualifier in spring 
+	When we create more than one bean of the same type and wire only one of them with a property we can use @Qualifier along with @Autowired to remove the ambiguity by specifying which exact bean should wired 
+
+Microservices : 
+
+1. microservices architecture
+microservices are basically an SDLC in which large applications are build as a collection of small functional modules
+	It is an architecture to develop an complex application
+	These are build as a small and independent services
+	These services communicate with each other through API like soap and rest
+	It will enabled modular and decoupled systems
+
+2. Benefits of using microservices architecture?
+	1. Scalablity
+	2. Resilence 
+	3. Flexiblity, Faster development cycle
+	4. Easier to maintainable
+	
+3. SOLID Principles
+	Group of object oriented Priciple is called solid principle
+	Using this principle developer can write a Readable,maintainable and clean code
+	Single Responsible Principle[SRP] : Each class and module in a program should focus on a single tasks
+	open-closed principle[OCP] : Software entities(classes, modules and methods) should open for extension but closed for modification
+	Liskov Substitution Principle[LSP] : Object of its superclass should be able to replaced with object of its subclass without breaking its behavious of the program
+	Interface Segregation Principle[ISP] : client should not be forced to depend upon interface they do not use
+	Dependency Inversion Principle : use of interface and dependency injection to decoupled modules and make them more reuseable and testable
+
+4. Spring cloud and what are its key feature [Need to learn more about this channels -> Java guides , Coler Ulagam]
+	Spring cloud is a framework built on top of the spring boot
+	used for development and deployment of microservices
+	Key feature : service discovery, registration, load balancing, circuit breaking, distributed configuration, API gateway and distributed tracing
+	
+5. What is service discovery  and how it is acheived in spring cloud
+	The process of dynamically locating and communicating with services
+	In spring cloud, service discovery is acheived using netflix eureka or consul
+	Allow services to register themselves and discover other services, enabling communication between microservices
+	@EnableEurekaServer
+	server.port = 6666
+	eureka.client.registerWithEureka =false
+	eureka.client.fetchRegistry=false
+	
+	EurekaServer -> dependency for server
+	EurekaDiscoveryClient -> dependency for client
+
+6. Explain the role of API gateway in microservices
+	Act as a single entry point for client request to microservices
+	Handling dynamic routing and load balancing
+	The Gateway library is used to implement the Gateway API
+	Support integration with Service discovery and Authentication
+	No hard code url
+	No cost cutting concern
+	Authentication
+	Authorization
+	Static/dynamic routing
+Common Gateways in market
+Spring cloud zuul - open source
+Apgee API Management
+AWS API Gateway
+Azure Api Fateway
+
+API gateways -> Routing traffic
+			-> Simplifying complexity
+			-> security [authentication/ authorztion]
+			-> managing scalablity
+			
+spring.cloud.gateway.routes.id = order-service
+spring.cloud.gateway.routes.uri = lb://order-service  -> lb : loadbalanced 
+spring.cloud.gateway.routes.predicates = Path=/order/**
+ 
+
+
+	
+7. What is circuit breaking and how it is implemented using spring cloud
+	It is a pattern that prevents the cascading failures in microservices
+	Circuit breaking is implemented using netflix hystrix lib[older one] and Resillence4j
+	Monitor the health of dependent services and if failures occurs, open the circuit to stop sending the request
+	It ensuring the overall system stability
+	
+8. What is load balancing and how it is handled in microservices 
+	Distribution of client request across multiple instance of a service 
+	Spring cloud integrates with load balancer like netflix ribbon / cloud load balancer
+	These are client side load balancing
+	Handle load distribution without manual configuration
+
+9. Tools to aggregate microservices log files
+	ELK Stack[ELasticSearch, LogStack, kibana]
+	Splunck
+	Fluented
+
+10. What is distributed tracing and how it is implemented in spring cloud
+	It is a technique used to track and monitor request as they flow through multiple microservices
+	It is implemented through integration wit tracking system - zipkin
+	Sleuth used for tracking information across microservices, transferred to zipkin server Using zipkin client
+
+11. purpose of spring cloud config and how does it work
+	It is centralized management of configuration properties for microservices
+	It uses configuration in a version- control repository and provide a configuration server
+	Microservices can retrive their congiguration information from the server at runtime, enabling dynamic and centralized configuration
+
+12. What are different types of Spring cloud config
+	1. Local File System : Configuration property file can be stored in a local file system. the configuration files typically yml file or property final
+	2. GIT : microservices can retrve the configuration from specific GIT repository, allowing for version control and easy management
+	3. Harshi corp valult : Configuration files stored securily in vault, and spring cloud config server can retrive them using authentication and authorztion mechanism
+
+13. diff approaches for inter-service communication in microservices
+	It includes synchronous communication through Http/Rest api
+	Asynchrous communication using message brokers like Rabbit Mq and apache kafka
+	Event driven communication using event buses or pub/sub mechanism
+
+14. Service orchestration and service choreography
+	Service orchestration is a centralized approch where central components controls and coordinates the execution flow of microservices
+	service choreography is a decentralized apporoach where microservices collabarate with each other, without a central contoller
+	Service orchestration provides a more controlled and coordinated workflow 
+	Service choreography gathers flexiblity to individual services
+
+15. Role of container and container orchestration platform [imp Ques]
+	It is a light weight and portable enviornment for packaging and deploying microservices
+	Consistency across different enviornment
+	orchestration platforms such as kubernet, Docker swam, automate the management of container at scale
+	They handle task like deployment, scaling, service discovery, load balancing and fault tolerence in a distributed enviornment
+
+16. Spring Profiles
+	allowing us to map our beans to different profiles — for example, dev, test, and prod.
+First need to create a new profile file or yml file.The name of the file should be ex : application-qa.properties -> Property file -> spring.profile.active=qa 
+ex: application-prod -> Property file -> spring.profile.active=prod
+
+17.swagger 
+For Rest api swagger document is very critical
+input and output
+For SOAP webservices WSDL is the contract document, same for REST API swagger is the contract document
+Contract document means it contains the information about what input to provide and what output is getName
+
+
+imp Annotations in spring boot
+@Component -  it tells the spring container to automatically create a spring bean
+			It indicate that the annotated class is a spring bean /component class
+
+@Autowired - is used to inject the bean automatically
+			is used in constructor injection, setter injection , field injection
+
+@Qualifier - is used in conjuction with autowired to avoid confusion when we have two or more beans configured for same type
+
+@Primary - to give higher preference to a bean where there are multiple beans of a same type
+
+@Bean - It indicates that a method produces a bean to be managed by the spring container
+		It is usually declared in Configuration class to create spring bean definition
+
+Stereotype annotations -  These are used to create spring beans automatically in the application context(Spring Ioc container)
+					The main stereotype annotation is @Component.
+					By using this spring provides more stereotype meta annotation such as @Controller @Repository @Service
+@Service - used to create a spring bean at service layer
+@Repository - used to create spring bean for the repositories at the DAO layer
+@Controller - used to create spring bean at controller layer
+
+@Lazy - By default spring creates all singleton beans eagerly at the startup/ bootstrapping of the appl context
+	 we can load the spring bean lazily (on-demand) using @Lazy
+	 we can used with the help of @Configuration @Componenet @Bean annotation
+	 Eager initialization is recommended : to avoid and detect all possible errors immediately rather than at runtime
+
+@Scope - is used to define the scope of the bean
+		we use by the help of @Componenet or @Bean definition
+		4 types of scope -> Singleton , Prototype, request, session
+
+@SpringBootApplication - It is the combination of @SpringBootConfiguration @ComponenetScan @AutoEnableConfiguration
+
+@ComponenetScan - is used to scan the base package and sub packages which is annotated with @Componenet
+
+
+GIT :
+It is a distributed version control to monitor ur team or work with our team together in same workspace
+imp Commands 
+1. git clone - Download repository from cloud like git hub to ur computer for develepment
+2. git commit - once changed the code will again save the code to local repository 
+3. git push - changes of code to push from local repository to cloud
+4.git pull - pull the latest code
+5. git branch - create seperate working branch
+6. git merge - merge changes to main branch 
+
+
+Git and git hub
+Git is a software which is downloaded in local system
+Github is a service which is cloud based
+Git is maintain by linux
+Github is maintain by microsoft
+
+git init -> git add "fileName" -> git commit -m "message" git remote add origin https://github.com/git -> git push -u origin master 
+	git add . -> add all the files
+	git checkout -b "new" -> to create a new branch
+	git checkout  new -> to switch to new branch
+	git checkout master -> to switch to master
+	
+
+day to day activities
+Gathering the req and developing the code 
+Designing and developing controller and business layer using spring MVC
+involving in DB script if needed and deployment in DEV and qa 
+Resolving producion issues and support for the team members
+preparing the IA UT doc and Preparing the unit test documents
+
+My GitHub username : Hemnath2908 or email : hemnath.purushothaman@gmail.com -> Password : Hemanth@2908
+
+JPA ques :
+
+1. What is ORM?
+	ORM stands for Object Relational Mapping
+	It is a technique to creating a bridge between object oriented program and relational database
+	It is mainly for db operations like insert, delete, update and select
+	Every operations needs to be in object format
+
+2. What is JPA
+	JPA -> Java persistence API 
+	It is one of the ORM specifications
+	It is a java specification used to persist data between relational database and object
+	It acts as bridge between java xlass and relational database
+	
+3. Explain Mapping Rule in JPA
+	we define Entity(POJO) class for one Table
+	we define one variable for one column
+	Then the object is converted into one Row 
+
+4. Diff between JPA and Hibernate[imp]
+   JPA is a specification given by sunmicrosystem, now part of oracle
+   Hibernate is a JPA implementation
+
+5. JDBC vs Hibernate?
+	Both are designed to communicate with RDMS using java code
+	JDBC - JDBC is a tool
+	In jdbc we need to write a code to map the schema of the database
+	Jdbc supports Sql queries which is dependent to database
+	Hibernate - Is a framework
+	It performs automatic object mapping with minor configurations
+	It supports HQL which is database independent
+
+6. adv of using JPA?
+	Database independent
+	Easy to develop a database operations
+	JPQL/HQL support [JPQL -> Java Persistence Query Language/ HQL -> Hibernate Query Language]
+	Type(datatype) and parameters handling
+
+7. what is spring data or spring boot data jpa repository?
+	There 3 string boot data repository
+		1. CrudRepository
+		2. PagingAndSortingRepository
+		3. JPARepository
+	all the 3 are interface, its implemented class is generated by spring boot at runtime
+
+8. diff between pagingAndSorting and JPA repository?
+	Jpa repository is working only for relational database
+	like mysql, oracle,postres etc
+	PagingAndSortingRepository and CrudRepository is works for both Sql and no sql database
+	like mangoDB etc
+	In pagingAndSortingRepository we can also perform pagination and sortings
+
+9. pre-defined methods given by the Repository interfaces?
+	-> save()	 - to save data 										-> existById() 
+	-> delete()	 - to delete data										-> findAll(sort)	
+	-> findById() - to find a particular data by primarykey				-> findAll(pageable)
+	-> findAll() - to fetch all the data
+	-> deleteById() - to delete a particular data by primarykey
+	-> count() - to get the row count
+
+10. what is Entity class and commonly used annotations for this
+	A class which is mapped with the database table is called entity class
+	we can also called it as POJO class(Plain Old Java Object)
+	It must with mapped with Database table using JPA annotations like
+	@Entity  @Table(name="")   @Column(name= "") @Id  etc
+
+11. what is the naming convention for finder methods in spring data repository interface?
+	The naming convention of finder methods is pre-defined keyword followed by variable name in java class
+	syntax : <ReturnType> findBy<variableAndkeyword>(DataType params);
+	Ex : List<User> findByLastName(String LastName);
+
+12. How can we create a custom repository in spring data Jpa
+	we can create our own custom repository by extending any one of following below
+		Respository  - > if we dont want to use any methods which is provided by Crud/jpa repository then we go for Repository, because it is an empty repository  
+		CrudRepository
+		PagingAndSortingRepository
+		JPARepository
+	
+13. What is pagingAndSortingRepository
+	By using this repository, we can sort the data either in asc or desc order
+	Also we can convert the record or print the record page by page [pagination]
+	This repository extends crudRepository
+
+14. @Query used for?
+	@Query Annotations is to write a custom query or user/programmer defined query
+	By using this we can write JPQL/HQL query 
+	JPQL/HQL query  means query which is written by the class and the variable name rather than the DB table and column name
+	Here JPQL is a specification and HQL is a implementation
+
+15. types of query can be implemented using @Query annotation
+	we can write select and non-select[update/delete but not insert]operations
+	we can write both JPQL and native sql queries
+	But when we using @Query with non-select operations like update or delete we need to additionally add @Modify annotation. Because @Query annotation default it will take select query
+
+16. Example of Using @Query annotation with JPQL?
+	@Query("Select e from Employee emp where emp.name = :name")
+	List<Employee> getEmployeName(String name);
+		-> Must defined inside repository class
+		-> Must be a abstract class
+		-> Must check JPQL/HQL syntax
+
+17. What are collection Mapping supported by JPA?
+	JPA supports collections like Set,List, Map
+	We need to add @ElementCollection over variable
+	It create one child table with 2/3 column
+	
+	Key column -> foreign Key column
+	index column -> Position of value in collection
+	Element column -> Actual Data of collection
+	
+	For Set collection table is created with 2 columns
+	For List/Map collections, table is created with 3 columns
+
+18. What is Platform Transaction Manager?
+	It is an interface that extends TransactionManager
+	It is the central interface in spring transaction infrastructure
+	It enables @Transactional Annotations which do commit in case of success and rollback in case of exception/failure
+
+19. How to enable spring Data Jpa
+	In spring boot comes with auto configurable, just add the dependency in pom.xml file -> spring-boot-starter-data-jpa
+	we need to write some comfiguration in application.property file to get the data source 
+	spring.datasource.url=jdbc:thin:oracle:@localhost.port
+	spring.datasource.username=
+	spring.datasource.password=
+	spring.datasource.driver-class-name=
+
+20. Diff between findById() and getOne() [imp ]
+	findById() present in CRUD Repository whereas getOne() present in JPARepository
+	If data is not found in findById() method it will return null, means it return type as Optional<T> class
+	If data is not found in getOne() method, it will throw an exception called EntityNotFoundException
+	
+21. use of dialet and give some ex?
+	It is a class defined in Jpa
+	It generates SQL at runtime based on our operations, like calling save method and generate insert method 
+	If we move from one database to another db then we need to modify dialet database property in property file
+	ex : oracle10gDialet, MySql8Dialet, PostgresDialet etc
+
+22. Fetch Type in JPA [imp]
+	It is used for select operations for Association mapping or collection mapping
+	Fetch types are EAGER and LAZY
+	-> EAGER - Load parent Entity along with its associate child entities from DB table on select operations
+	-> LAZY - Load parent Entity along from DB table on select operations, Later calling child get() methods load the child entity
+	Fetch type is enum internally
+
+23. default fetch type in jpa?
+	There is no default value for fetch type. It depends on operations we do
+	LAZY for : one to many or many to many also for Element collection
+	EAGER : One to one and one to many
+
+24. How can we see generated SQL at console/log?
+	At default JPA will not show generated sql[query]
+	we need to add the property to view them - > spring.jpa.show-sql= true 
+	At default it is false
+	
+25. Types of JOINS supported by JPA?
+	-> Inner Join | Join - Gets commonly connected rows from both tables
+	-> Outer Join 
+	1. Left Outer Join | Left Join - Get all row from left table and common rows from right table
+	2. Right Outer Join | Right Join - Get all row from right table and common rows from left table
+	3. Full Outer Join | Full Join - Get all rows from both tables
+
+26. Provide both Sql and JPQL/HQL joins syntax
+	SQL - > Select <columns> From <ParentTable> <p> [Join type] <ChildTable><c> on <p><pk> = <c><ck> where <condition>
+	Ex: Select name from Employee emp Join EmployeeDetails empDetails on (emp.sno = empDetails.s.no) where emp.location = 'chennai'
+	JPQL/HQL - > Select <variable> From <ParentClass><P> [JoinType] <P><HasVariable> As<C> Where Condition
+	Ex: Select name from EmployeeClass emp JOIN EmployeeChildClass ECC
+	
+	
+	jdbc\:oracle\:thin\:@<HOST>\:<PORT>\:<CONNECTDATANAME>
+	jdbc\:postgresql\://<HOST>\:<PORT>/<CONNECTDATANAME>
+
+	postgres.dialect=org.hibernate.dialect.PostgreSQLDialect
+	oracle.dialect=org.hibernate.dialect.Oracle10gDialect
+
+	jdbc:oracle:thin:@localhost:
+
+Spring Data JPA mapping
+One to one - one directional / bidirecctional - 
+One to Many  
+Many to One
+Many to Many
+
+Collections Ques : 
+What are all the collecctions used in your projects
+List -> ArrayList -> maintains insertion order 2. allows duplicate values 3. allows n number of null values 4. Not a thread safe
+	 -> LinkedList -> maintains insertion order 2. allows duplicate values 3. allows n number of null values 4. Not a thread safe
+Set -> HashSet -> doesnt maintain insertion order2. doesnt allow duplicate value 3. allow only one null value
+	-> LinkedHashSet -> maintain insertion order 2. doesnt allow duplicate value 3. allow only one null value
+	-> TreeSet -> sort the value in asc or desc
+Map -> HashMap -> doesn’t maintain insertion order. 2. doesn’t allow duplicate value and key 4.doesnt allow duplicate null value and key
+	-> LinkedHashMap ->  maintain insertion order. 2. doesn’t allow duplicate value and key 4.doesnt allow duplicate null value and key
+	
+2. Diff between Set and list 
+if u want to store duplicates then we can use List 
+if u want to store unique values then we can use Set
+
+3. ArrayList and LinkedList
+Both are implementation of List interface
+ArrayList is better for storing and accesing data	2. bit shifting is required
+LinkedList is better for manupulating data 3. no bit shifting is required because its already know the previous element value
+
+4. Final list
+we can modify but we cannot reassign it
+ex -> List<String> list = new Array<>();  list.add("A"); list.add("B"); adding / modifying is possible but list = new LinkedList<>() -> it is not possible
+
+5. why set doesnot allow duplicates
+Set internally uses map interface to store the value. while adding value in set. the value will be stored as a key, whereas map doesn’t support duplicate values 
+
+6. ForEach -> Only forward direction and removal is not possible
+   Iterator -> Only forward direction and removal is possible
+   ListIterator -> bi directional and removal is possible
+
+Java 8 features
+	Lambda expressions -> Lambda expression helps us to write our code in functional style, It is very useful in collection library. It helps to iterate, filter and extract data     
+         	              from collection.
+						  Argument-list: It can be empty or non-empty as well.
+						  Arrow-token: It is used to link arguments-list and body of expression.
+						  Body: It contains expressions and statements for lambda expression.
+						  
+	Method references -> used to refer method of functional interface ,  Syntax ::
+	Functional interfaces, -> it is interface which contains only one abstract methods and n number of static and default methods
+	Stream API -> 
+	Base64 Encode Decode,
+	Optional class
+	Collectors class
+	ForEach() method
+	Parallel Array Sorting
+
+	
+@Setter , @getter, @AllArgsConstructor , @NoArgsConstructor @GeneratedValue , @SequenceGenerator - need to learn 
+
+DBPool.url=jdbc\:postgresql\://192.168.57.72\:5432/csmetadb
+DBPool.maxpool=10
+DBPool.password=T+/8GmA5RgpODxHkuZaM775JlDLA6aygYnY=
+DBPool.minPoolSize=5
+dbtype=POSTGRES
+DBPool.initsize=5
+schemaName=cs_meta
+drivers=org.postgresql.Driver
+DBPool.user=cs_meta
+
+
+ String concept  ---------|
+ OOPs concept			  |
+ Collection				  |----- JAVA
+ MultiThreading			  |
+ JAVA 8          ---------|
+ 
+ Spring 
+ SpringBoot
+ 
+ Microservices
+ 
+ REST API
+ 
+ Spring MVC
+ 
+ roadmap.sh
+ freecodecamp - html css
+ supersimpledev - basics javascript
+ namestheJavascript - adv javascript
+ javascriptmastery
+ amigoscode
+ 
+
+
+	
+
+
+	
+	
+		
+
+
+	
+
+
+ <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		
+		UUID.randomUUID().toString()
+		new Random().next

@@ -1,0 +1,403 @@
+Collections Imp Ques :
+Collection is used to store large unit of datas into a single unit
+
+Difference between Collection and Collections?
+Collection is a interface provided by the collection framework present in java.util package. 
+Collection is extended by Set, List and queue. Map is seperate interface
+
+Collections is a utility class present in java.util package. it provides various methods like sort and min and max etc
+
+1. What are all the collections used in ur projects?
+	List -> ArrayList
+			LinkedList
+	Set ->  HashSet
+			LinkedHashSet
+			TreeSet
+	Map ->  HashMap
+			LinkedHashMap
+			TreeMap
+copyOnWriteArrayList , copyOnWriteArraySet and concurrentHashMap
+
+2. diff between list and set
+ List -> it allows duplicate values and null values.
+		 To get value based on index we can go for list
+ Set -> does not allow duplicate value and only one null value
+		To store unique values.
+
+3. diff between ArrayList and LinkedList
+	Both are implementation of List interface
+	ArrayList -> ArrayList is better for storing and accessing data
+				shifting is required if we modified any value
+				It internally uses dynamic array to store the elements
+	LinkedList -> It is better for manupulating the data
+				shifting is not required if we modified any value because it already knows the previous value
+				It internally uses doubly linked list to store elements
+	doubly linked list (DLL) is a special type of linked list in which each node contains a pointer to the previous node as well as the next node
+
+4. List object scenario
+Type 1 : ArrayList list = new ArrayList();
+Type 2 : List list = new ArrayList(); which is preferable   
+		Type 1 is Tight coupling that means if we want to change the arrayList to LinkedList means we need to change the entire signature
+		Whereas in Type2 it is more preferable because if we want to change means we can just change the new operator and ArrayList, no need to change the complete signature.
+		Type 2 is the Runtime Polymorphism // Parent parent = new Child().
+		
+5. Type generic is mandatory in creating List
+	No, it is not mandatory. it is recommended to use type generic in collections to avoid typeCasting Exception in future.
+
+6. Primitive datatype and Non primitive data type
+	String, Integer, Long, Short, Character and Boolean are primitive data types
+	User -defined classes are the non primitive data types
+	Primitive datatype -> String str = "WELCOME" List<Integer> list = new ArrayList<>();
+	Non primitive data type -> Employee emp;  List<Employee> empList = new ArrayList<>();
+
+7. After declaring a list with final keyword we can modify the value?
+	yes we can modify the value by adding or removing. but we cannot reassign it
+	final List<String> list = new ArrayList<>();
+	list.add("A"); list.add("B");
+	But we cannot reassign -> list = new LinkedList<>();
+
+8. How can i write custom ArrayList where i dont want to allow duplicate?
+	refer CustomArrayList.java
+
+9. Why Set does not allow duplicate value?
+	Because set internally uses map interface to store the value, whereas passing argument is the key and value will be dummy object
+
+10. diff between comparable and comparator
+	Comparable -> It is present in java.lang package
+				  It provides compareTo() to sort
+				  Single sorting sequence 
+				  Collections.sort(list)
+	Comparator -> It is present in java.util package
+				  It provides compare() method to sort
+				  Multiple sorting sequence
+				  Collections.sort(list, comparator) -> ex : Collections.sort(list, (o1,o2) -> { o1.compareTo(02)});
+
+11. Multi comparing using comparator Scenario
+
+12. Diff between fail fast and fail safe iterator
+	Fail Fast -> when we do any modification while iterating over collections then it will occur fail fast iterator ex: ArrayList, HashMap, Vector
+	it uses mod count to iterate any collections. if we modify inbetween iteration the modcount will be changed and throws an ConcurrentModificationException 
+	Fail safe/Non fail iterator -> It allows us to modification in between the iteration  ex: copyOnWriteArrayList, copyOnWriteArraySet and ConcurrentHashMap
+	For copyOnWriteArrayList, copyOnWriteArraySet it will take the clone copy of the list/ set so that it will not throw an exception and modfied value also not added in the iterating list
+	For concurrentHashMap there will be no clone concept
+
+13. Need of concurrentHashMap and different from HashMap
+	HashMap -> Non -synchronized and Not a thread safe
+			   It is fail fast and throws an exception during iteration
+			   It allows to store null keys and values
+			   faster performance
+			   It lock the entire object
+	ConcurrentHashMap -> Synchronized and Thread safe 
+						 It is Fail safe during iteration
+						 It does not allow duplicate keys and values
+						 slow compared to hashmap
+						 it lock based on the segment
+						 
+HashMap and LinkedHashMap allows null key and multiple null values
+TreeMap allows only one null key and multiple null value. If we put multiple null key, then it will throw null pointer exception
+ConcurrentHashMap does not allow null key and value, If we put null key and value, then it will throw null pointer exception 
+
+14. HashTable is already synchronized then why we need concurrentHashMap?
+	Locking mechanism is same as HashMap in HashTable, It locks the entire map object
+	whereas in concurrentHashMap it locks the segment or bucket object
+
+15. We can synchronized the HashMap using collections when cant we use that instead of concurrentHashMap
+	If we used Collections.SynchronizedMap(map) it will act as a HashTable, again the lock mechanism is same as hashmap
+
+16. How hashmap internally works?
+	Refer D:\SpringBoot\HashMapInternallyWorks.png
+	Initially it will create a bucket. Each bucket internally uses a Linked List, this Linked List contains a Node[key,value,hash,next]
+	when we put a key and value in map at first it will find the hash value for that key and find the bucket index for that key. Then the value is stored in that index that contains key, value, hash, next. So if sometime hashcollision may occur that time it will imediately check whether the key is same or not for both nodes if different it will add in same bucket otherwise it will replace
+	
+
+Hash Collision ?
+	If both the value has same bucket index then it is called hash collision
+
+17. If key is null in HashMap then where the entry will store?
+	If key is null then it will directly placed in 0 bucket because we cant able to get the hashvalue for null
+
+18. Map enhancement in java 8
+	In java 8 they used balanced tree mechanism instead of Linked List after some threshold
+	At initial it will Linked List at after some threshold it will converted to Balanced TreeMap
+
+19. How treemap internally works
+
+20. LinkedList, LinkedSet, LinkedHashMap allows the insertion order
+	ArrayList,HashSet,HashMap and treeMap does not allow insertion order
+	
+	TreeMap is used to store data in ascending order or descending order. At default it will be in asc order.
+	to store in descending order we need add -> Map<String,Integer> map = new TreeMap<>(Collections.reverseOrder())
+	Tree Map does not allow null key but allows multiple null value
+	
+	ConcurrentHashMap  it does not allows null key and value. it throws null pointer exception
+	
+	
+	
+
+-----------------------------JAVA 8 Ques-----------------------------------------------------------------------------------
+Programatical :
+1. Java program to count the occurence of each character on a given string
+2. Find Duplicate elements of a string
+3. Java program to print first non repeated element from a given string
+4. Java program to find 2nd highest number from given array -> {5, 9, 11, 2, 8, 21, 1};
+5. Find Longest String from a given array
+6. Java program to find all elements who starts with array as 1 -> {5, 9, 11, 2, 8, 21, 1}
+7. String.join program
+8. Skip and limit use case example
+9. sort a list and map 
+
+Ques
+1. Functional Interface
+	The Interface which contains only one abstract method an n number of static and default methods
+	Ex -> Runnable -> run()
+		  Callable -> call()
+		  Comparable -> compareTo()
+		  Comparator -> compare()
+		  
+2. Consumer Functional Interface
+	It is an interface which is introduced in java 8. 
+	pass the input and do some logic and void return type --> accept()
+3. Predicate Functional Interface
+	It is used in conditional statement. When u want to return an true or false we can go for predicate functional interface  -> test()
+4. Supplier Functional interface
+    No input to pass but it will return value  ---> get()
+
+5. Stream In Java
+	Stream Api is used to process collection of data
+	A stream is a sequence of object that supports various methods which can be pipelined to get the desired result 
+	It is not a datastructure instead it takes input from the collections
+	It dont change original datastructure
+
+6. Why we need Stream?
+	Functional Programming
+	Code reduction
+	Bulk operation
+
+7. Method Reference 
+	Syntax -> ObjectName :: methodName
+				|              |
+			Reference       name of the method
+
+8. Types of method references
+	1. Static method references
+	2. instance method references
+	3. Reference constructor
+	
+9. why method references
+ To write the lambda expression into simplest form
+ To improve the Code readablity
+
+10. What is Map-Reduce in stream
+	Map -> Transforming data
+	Reduce -> aggregating data
+	[combine stream of elements and produce a single value]
+	Map() -> Transform Stream<Object> to Stream of int
+	reduce() -> combine stream of int to produce sum result
+	
+ -----------------------------------------------------------
+ 
+ Completable Future
+ 
+1. What is Completable Future
+	It is a new era of asynchronous programming
+	Using asynchronous programming we can write non - blocking code when concurrently we can run N number of task in seperate thread without blocking main thread
+	When task is completed it will notify to the main thread
+	
+2. Why Completable Future
+ There are many ways to do asynchronous process in java using any of the below mechanisms like Future, ThreadPool, ExecutorService and Callable Interface etc
+ By using those above mechanism we can face few issues like
+ 1. we cannot manually complete the thread execution
+ 2. multiple futures cannot chained together
+ 3. We cannot join multiple future
+ 4. No proper exception handling mechanism
+ 
+3. Difference between submit and execute in ExecutorService?
+	submit takes the argument as Callable -> If we want to return any value we can use submit()
+	execute takes the argument as Runnable  -> If we dont want to return any value we can use execute()
+
+4. runAsync() and supplyAsync()
+	When we dont want to return any value or data then we can use runAsync  -> CompletableFuture.runAsync(Runnable)   || CompletableFuture.runAsync(Runnable, Executor)
+	When we want to returen any value or data then we can use supplyAsync -> CompletableFuture.supplyAsync(Supplier<T>) || CompletableFuture.supplyAsync(Supplier<T>, Executor)
+	
+5. thenApplyASync() || thenApply()
+6. thenAcceptAsync() || thenAccept() 
+
+
+Imp stream pipelines
+	1. filter(predicate)
+	2. map(consumer)
+	3. flatMap(consumer)
+	4. collect(supplier) -> Collectors  -> groupingBy
+	5. forEach
+	
+	
+JAVA 8 IMP ques
+
+1. java 8 features  u have used?
+	1. Functional Interface
+	2. Lambda Expression
+	3. StreamApi
+	4. Method Reference
+	5. CompletableFuture
+	6.DateTime Api
+
+2. Function Interface
+	A interface must contain only one abstract method and any number of default and static methods
+
+3. can u tell me few functional interface
+	Runnable
+	Callable
+	Comparator - > we have 2 abstract method compare() and equals() -> equals() is inherited from java.lang pkg so it is not counted as a abstract method
+	
+4. Default method in functional interface 
+	Default method does not force the user to override the implementation of the method. It is optional to override
+	In real world scenario -> In UPI payments we have payment method which is abstract and default method is getScratchCard(). so that user can proceed for payment. if had a scratchcard means he will enter the code. so its not mandatory to override the scratchcard method
+
+5. static method in functional interface
+	It is the utility method inside the functional interface
+	Utility means a service provider
+	
+6. Can u write one function Interface?
+	@FunctionalInterface
+	public class Test(){
+		
+		String payment(int amount);
+		default getStrachCard(){
+			return UUID.randomId();
+		} 
+		static getTime(){
+			System.out.println(new Date());
+		}
+	}
+	
+7. Can we extend one functional Interface with another functional interface?
+	Yes we can extend functional interface with another functional interface, but it will act as a traditional interface
+	because a functional interface must contain only one abstract method if we extend means it will get 2 abstract method, if we extend another interface means we need to remove @FunctionalInterface anotation otherwise it will get an compile time exception
+	
+
+8. What are all functional interface introduced in java 8
+	1. Function -> which contains 2 args and a return type  -> apply(a,b)
+	2. Predicate -> which contain 1 arg and a return type as boolean -> test(a)
+	3. Consumer -> which contains 1 arg and a no retrun type -> accept(t)
+	4. Supplier -> no input and 1 optional output -> t get()
+
+
+9. What is lambda expression?
+	An lambda expression is an annonymous function which has no method name and access specifiers, in other word it provides a clear and concise way to represent method of a functional interface using an expression
+	syntax -> () -> {}
+	
+10. pros and cons of lambda expression
+	pros : 
+		avoid writing annonymous implementation
+		It save a lot of code
+		easy to readable
+	cons:
+		Hard to use without an IDE
+		complex to debug
+
+11. What is stream API?
+	Stream API is introduced in JAVA 8 and it is used to process collections of object with functional style of coding using lambda expression
+	
+12. What is stream in java 8
+	A stream is a sequence of object that supports various methods which can be pipelined to produce the desired result
+	The features of java stream are	
+		A stream is not a datastructure instead it takes input from the collection / array
+		Stream dont change the orginal datastructure, they only provide the result as per the pipelined methods
+	
+13. Method refernces in java
+	Method references is a shortcut for lambda expression to call a method
+		Static method references -> we can directly call by class name   ex -> Employee :: getEmpName
+		Instance method references -> we need create an object and call by an refernces  ex -> Employee emp = new Employee();  emp :: getEmpName
+		Constructor method references -> new keyword -> Employee :: new 
+
+14. Few stream methods u have used in ur project?
+	1. filter
+	2. forEach
+	3. sorted
+	4. map
+	5. flatMap
+	6. reduce
+	7. groupingBy
+	8. count
+	9. collect
+
+	
+15.  when to use map and flatmap?
+	Map -> it is used to process the data. One to one mapping. Only perform the mapping.
+		   used only for transformation.
+	FlatMap -> One to many mapping. Perform mapping as well as flattening.
+				used both for transformation and mapping.
+				By using the flattening mechanism, it merges all streams into a single resultant stream. 
+				
+16. write a program to find frequency of each character in a given string
+
+17. write a program to find highest paid employee from each dept
+
+18. Stream vs parallelStream?
+	Both are used to process the group of object 
+	Stream execute in a single core of ur machine
+	parallelStream execute in a multiple core of ur machine
+	For read operation we can use parallelStream
+	For write operation we can use stream
+	
+19. What is completable Future?
+	It is the enhacement of the Future object. It is used for asynchronous programming in java
+	Asynchronous programming means writing a non- blocking code by running a task on a seperate thread than the main application thread.
+	It will notify the main thread about its progress, completion or failure
+	
+20. why completable future why not Future?
+	There are many ways to do asynchronous process in java using any of the below mechanisms like Future, ThreadPool, ExecutorService and Callable Interface etc
+ By using those above mechanism we can face few issues like
+ 1. we cannot manually complete the thread execution
+ 2. multiple futures cannot chained together
+ 3. We cannot join multiple future
+ 4. No proper exception handling mechanism
+ 
+21. How to decide thread pool size?
+	It all depends on our usecase
+	1. CPU intensive Task
+	2. IO intensive Task
+
+22. Write a program to print even and odd using 2 threads?
+
+
+
+Synchronized basically means that only one thread can access methods of that particular class at any given time. StringBuffer is an example of a synchronized class. A Synchronized class is a thread-safe class.
+
+Non-Synchronized means that two or more threads can access the methods of that particular class at any given time. StringBuilder is an example of a non-synchronized class. Generally, a non-synchronized class is not thread-safe. (but some non-synchronized classes are thread-safe)
+
+Threads
+	Threads allows a program to operate more efficiently by doing multiple things at the same time
+	Threads can be used to perform complicated tasks in the background without interrupting the main program.
+	
+MultiThreading
+	It is a process of executing multiple threads simultaneously
+	
+	
+	
+
+
+
+	
+	
+	
+	
+
+ 
+	
+				
+
+	
+
+
+
+						 
+	
+				  
+
+	
+	
+
+				
+	
+				 

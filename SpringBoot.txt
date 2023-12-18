@@ -1,0 +1,307 @@
+Spring Boot :
+
+1. why will u choose spring boot over spring
+	The most imp feature in springboot is autoconfiguration
+	Embedded Tomcat and Jetty[no need to deploy WAR file]
+	It Provides production ready features
+	we no need to maintain / remember all the dependencies versions
+
+2. What all spring boot starter u have used or what all module u have worked on?
+	spring boot starter web  - is to develop any web MVC project or web application
+	spring boot starter data JPA - is to integrate with persistance layer
+	spring boot starter web services - soap based 
+	spring boot starter security - security purpose
+	Spring Boot starter for spring cloud - microservice 
+	Spring Boot starter for thymeleaf - static web page
+
+3. How will u run Spring Boot application?
+	It goes to the compiled class and trigger directly
+	It will not run any jar file. while we run a spring boot application
+	
+How spring boot starters internally works?
+	spring boot starters will combine the related dependencies into single dependency
+	For ex : In spring if u want to create an web application means we need add all the dependencies like spring web jar, spring core jar, servlet jar etc..but in spring boot by just giving spring-boot-starter-web in pom.xml file it will automatically add all the dependencies to our project
+
+4. Purpose of @SpringBootApplication Annotation?
+	It is the combination of
+		1. @EnableAutoConfiguration - It will automatically configures various components for ur application by just scanning ur dependency and classpath
+		2. @ComponentScan - it will scan main class and sub folders but it will not load the external package 
+		3. @Configuration - It allow to register extra bean into the context or additional configuration classes
+	
+5. Can i write above 3 annotations directly in main class instead of writing @SpringBootApplication
+	yes we can write -> @EnableAutoConfiguration @ComponentScan({"com.package.*","another package"}) @Import(TestConfig.class) //custom configuration class
+
+6. AutoConfiguration
+	It will scan all our dependency and class path and then it will decide 
+	@ConditionalOnClass annotations helps to decide whether the class to be auto configure or not
+	It will do autoconfiguration based on the positive matches and negative matches -> Note : In properties file add -> debug = true
+
+7. How can u disable a specific autoconfiguration class in spring boot?
+	Yes can disable the specific autoconfiguration class in spring boot from the main method itself by using
+		@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class,AopAutoConfiguration.class})
+		We can also exclude the autoconfiguration class from properties files also by using  spring.autoconfigure.exclude = full package name with classname
+			 -> ex : spring.autoconfigure.exclude = com.package.autoconfiguration.AopAutoConfiguration , com.Datapackage.autoconfiguration.DataSourceAutoConfiguration
+
+8. How can u customize the default configuration in spring boot?
+	we can provide the configuration details in two format 
+		1. application.properties
+		2. application.yml
+	Ex : Default port configuration is 8080. but we can change the port by specifying in the property file. server.port = 8081
+
+9. How spring boot run method works internally?
+	-> Create Application Context()
+	-> Register bean into context
+	-> start the embedded tomcat to run the application
+	
+	It load the enviornment and checks the application type and create the application context and register all the beans into the context and then it will start the embedded tomcat 
+	Note: 
+		Enviornment means it will read the jvm version and properties files
+		If we use spring boot starter web -> then the application type is "Servlet"
+		If we not use spring boot starter web -> then the application type is "Default"
+
+10. What is command line runner in spring boot?
+	It allows to execute the logic at the run time in spring boot application. so that we need to implement the CommandLineRunner Interface to our Spring boot main class
+	if u want to perform any preprocessing logic or db operations we can use commandLineRunner
+	It has a override method called run(). 
+	SpringApplication.run() and run() is different
+
+11. If we have two run method commandlinerunner run method and springApplication.run method which will run first ?
+	SpringApplication.run(class, args) will run first and then CommandLineRunner run will execute next
+
+12. Can u explain the purpose of stereotype annotations in the spring framework?
+	They are used to indicate the role or pupose of a class within the spring application and there are different types of stereotype annotations
+		-> @Component - it is parent . allows Spring to detect our custom beans automatically. Simply spring will scan all the classes in our application which is annotated with @Component, then it will create a bean for that class and inject the dependencies with them.
+		-> @Repository - it inherited from @Component, It indicate that the class provides the mechanism for storage and db operations
+		-> @Service - it inherited from @Component, It indicates that the class provides business Logics 
+		-> @Controller - it inherited from @Component and @RestController - it inherited from @Controller
+	It is not enforcement to place the stereotype annotations in correct place. we can also use @Controller in business logics spring will not throw any exception
+	But it is not a right way to use that.
+	A controller is responsible for handling HTTP request and returning HTTP response to client.
+	@RestController instead of returning HTML, you will probably like to return JSON or XML 
+	
+13. How can u define a bean in spring framework
+	one way we just define a stereotype annotations to create a bean
+	another way by using the external cofiguration class to load the bean
+	
+14. What is dependency injection?
+	Is a design pattern is used to acheive loosely coupled application by removing the direct dependency between them
+	
+15. How many ways we can perform dependency injection in spring or spring boot?
+	1. Field level dependency injection
+	2. Setter level dependency injection
+	3. Constructor level dependency injection
+
+16. Where u would choose to use setter injection over constructor injection and vice versa
+	Constructor DI -> when u want ur dependency is mandatory for ur bean
+				   -> Immutable in nature
+				   -> Circular dependency is not possible
+	Setter DI -> If u want ur dependency is optional for ur bean or services then we can go for Setter injection
+			  -> not imutable in nature
+			  -> Circular dependency is possible
+
+17. Can u provide an use case of @PostConstruct is used?
+	We can use @PostConstruct logic if we want to do some preprocessing operations on the startup
+	It will execute after the SpringApplication.run method and before the commandLineRunner run()
+	-> Connection pool logic -> data populating etc or external API call
+	
+18. How can we dynamically load values in Spring boot application? @Value
+	1. add the value in properties files or yml file  -> Eg - test.name = hemnath
+	2. above the datatype @Value("${test.name}")
+	We can also load the value in spring boot by using the Enviornment which is given by the Spring framework core.env. Eg.
+	@Autowired
+	Enviornment enviornment;			enviornment.getProperty("key given in the property file");
+	
+19. Can u explain the key differenence between YML and Properties files, in what scenario u might prefer one format over another?
+	In spring application we have option to use both the files to load the configuration, and differenence are,
+	-> Syntax and Structure -> yml is more readable compared to properties files
+	-> hierarchy 
+	-> list and array  -> In properties files we need to specify the list with comma seperator
+	-> Complex Datatypes -> we cannot define complex datatypes in properties files, it will understand only the string and integer
+	-> Readablity -> Property files are more compact but is less readable
+Real workd usecase 
+		If we have complex hierarchy configuration we can use yml
+		If we have simplest configuration we can use properties file
+	
+20. Diff between YML and YAML?
+	Both are same purpose and follow the same syntax
+
+21. Which will load first properties files or Yml file
+	Properties file will load first and then Yml file will load. 
+	Application.properties files will get more precedence to load the file 
+
+22. How to load External Property file
+	spring.config.import=file Location
+	Ex : spring.config.import=D://SpringBoot/extApplication.properties
+
+23. How to map or bind config properties to java object
+	To map or bind config properties to java object we need to add
+	@ConfigurationProperties(prefix = "spring.datasource") annotations in the configuration class
+	
+24. How will u resolve bean dependency ambiquity?   -> by using @Qualifier("class name should be camelcase") 
+ex: @Qualifier("exampleProgram")
+
+25. Can we avoid dependency ambiquity without @Qualifier -> by using @Resource(name="") and also we can define it by using @Primary
+
+26. Bean Scope
+	Singleton - Only one instance will be created for a single bean definition
+	Prototype - A new instance will be created for a single bean definition every time a request is made for that bean.
+	Request - A new instance will be created for a single bean definition every time an HTTP request is made for that bean.
+	Session - instance will created based on login and logout
+
+27. custom bean scope
+
+28. real time use case for singleton and prototype
+	Singleton -> Database Configuration
+				 Service Layer
+				 Application cofiguration
+	
+	prototype -> user session
+				 Thread safety
+				 Heavy Initialization
+
+29. can we inject prototype bean in singleton bean? if yes what will happen if we inject prototype bean into singleton bean class
+	Yes can, if we inject prototype bean in singleton bean class, then the prototype class object will be act as a singleton. that is only one object will be created
+	
+30. diff between spring Singleton and plain singleton
+    spring singleton is within the application context. 
+	plain singleton is within the jvm
+	
+31. BeanPostProcessor interface in spring
+	To do preprocessing logic before or after creating a bean
+	For ex: If we create an bean for datasource or any login form, we can validate the username/password by BeanPostProcessor
+
+32. Restful webservices Http method u have used?
+	POST - Create
+	PUT - Update
+	GET - Retrive
+	DELETE - Remove
+	PATCH - Partial update
+	
+33. How to specify Http method type for ur rest endpoint?
+
+34. differenence between PathVariable and RequestParam?
+	PathVariable will force u to give the input 
+	@GetMapping("/test/{orderName}")
+	public String test(@PathVariable String orderName)
+	Note : inside the GetMapping name and @PathVariable variable name should be same otherwise it will throw an exception
+	For Ex : we should not write @GetMapping("/test/{orderName}")
+								 public String test(@PathVariable String orderItem)
+								 
+	RequestParam will not force u to give the input
+	@GetMapping("/test"){
+	public String test(@RequestParam(value = "orderName", required = false) String orderDetail){
+
+Ref InterviewController.class
+
+35. Why RestController and why not Controller?
+	Controller -> If we define a class as a @Controller, it will expect to return a Http response of model and view. we should return the html page by give html name
+	We need add @ResonseBody annotation over the endpoint to return as a string
+	
+	RestController - > It is inherited from @Controller and it is combination o @Controller and @ResponseBody
+	
+36. How can we deserialize a JSON request payload into an object within a Spring MVC Controller?
+	@RequestBody annotation will deserialize the JSON request into Object
+	Passing Json keys and variable name should be same
+
+37. Can we perform update operation in POST http method if yes then why do we need PutMapping or put http method?
+	PostMapping - Is used to Create the resource
+				  If we hit multiple times multiple rows will be created
+				  It is not idempotent. It modify the resource on server
+	PutMapping - Is used to update the resource 
+				 If we hit multiple times Single row only created
+				 It is idempotent. It wont modify the resource on server
+
+38. Can we pass @ResonseBody in GetMapping?
+	Yes we can pass @ResonseBody in GetMapping. But it is not recommended 
+
+39. How can we perform content negotiation(XML/JSON) in Rest endpoint?
+	Java techie springboot interview que 40:00
+
+40. What all are status code used in ur project?  [imp]
+	400 - Bad Request - wrong input
+	404 - Page not found  - resouce is not available
+	401 - Authentication error - wrong creditiential
+	403 - Not Authorized
+	405 - Method not allowed. if we wrongly send http methods
+	415 - Unsupported Media type. If client expecting JSON but we send xml format then this error will occur
+	500 - Internal Server Error
+	502 - Bad Gateway
+	200 - Request success -> Status code ok
+	201 - Request success -> Status code created
+	
+41. How can u customize the status code for ur endpoint?
+	yes we can by using @ResponseStatus(value = HttpStatus.CREATED)
+	refer InterviewController
+
+42. How can u enable cross orgin in ur project
+	It is a security feature implemented by web browser to control web page request made from one to another
+	Using this we can restrict what all host and domain can access ur application
+	we can restrict from @CrossOrgin(orgins= "http://localhost:8081") and also from configuration file
+	
+43. How can u upload a file in springboot?
+	By using MultipartFile   Ex -> public String uploadFile(@RequestParam(value = "Key") MultipartFile file){
+	spring.servlet.multipart.max-file-size=10MB
+	spring.servlet.multipart.max-request-size=10MB
+	server.tomcat.max-swallow-size=-1
+	server.tomcat.max-swallow-size=100MB
+	we need to define above configurations in properties file to avoid largeFileRestriction
+	
+44. How to maintain a versioning a REST API?
+	U can maintain the versioning based on PathUri
+	based on RequestParam
+	Based on RequestHeader
+
+45. How will document ur rest API?
+	By using swagger now it is changed as open Api3
+	so that we need to add the below dependency
+	<dependency>
+		<groupId>org.springdoc</groupId>
+		<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+		<version>2.0.4</version>
+	</dependency>
+	http://localhost:8082/swagger-ui/index.html
+
+46. How can you hide certain REST endpoints to prevent them from being exposed externally
+	we can hide the endpoint in documentation swagger through @Hidden
+	@Operation(description = "This is swagger ") -> is used to write the description of the endpoint
+
+47. how to consume the restful API?
+	1. RestTemplate
+	2. FeignClient
+	3. WebClient
+	4. Advance Rest Client
+	
+	
+
+	
+	
+
+	
+	
+	
+	
+	
+				  
+	
+	
+	
+	
+	
+	
+	
+
+
+
+	
+	
+
+		
+	
+	
+ 
+	
+
+
+	
+	
+

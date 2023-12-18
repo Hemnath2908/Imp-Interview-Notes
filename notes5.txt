@@ -1,0 +1,136 @@
+The imp features in spring boot is auto configuration
+It provides a Embedded server like tomcat jetty etc
+we no need to remember/maintain all the dependencies versions instead spring boot will do for us
+It provides production ready features
+
+
+Spring boot starter web
+Spring boot starter data jpa
+spring boot starter web services
+spring boot starter spring cloud
+for thymleaf 
+
+AutoConfiguration
+It will scan all our dependencies and classpath and then it will decide
+@CondinalOnClass helps to decide whether the class to be auto configure or not
+It will decide based on positive matches and negative matches
+
+main class itself and also from properties files
+SpringBootApplication(exclude={"DatasourceAutoConfiguration.class"}) spring.autoconfiguration.exclude = pkg with classname
+
+Create application context()
+Register all the beans into context
+start the embedded tomcat
+
+It loads the environment and checks the application type and create the application contxt and register all the beans into the context and starts the embedded tomcat
+
+CommandLineRunner is allows to execute the logic at the runtime in the springboot appl. we need to implement the commandLineRunner Interface to the main class
+To perform some preprocessor logics and db operations we can use commandLineRunner
+It overides the run method
+
+stereotype annotations will indicate the pupose or role of a class within the spring application
+
+@Component - > Spring will scan our application class which annoted with component instantiate them and inject any dependencies into them
+@Repository -> it is inherited from @Component. It indicate that the class provides the mechanism for storage and db operations
+@Service -> it is a business it here we can write all our buisness logics
+@Controller -> 
+@RestController ->
+
+
+OrderService  -> orderGuid[String], orderId[int], paymentId[int], orderStatus[String], items[List<String>]
+PaymentService -> paymentGuid[String], paymentId[int], paymentStatus[String]
+GatewayService
+EurekaService
+ConfigService
+Additionally we need to add -> actuator, jpa, eurekaClient, configClient
+
+https://blog.devgenius.io/java-8-coding-and-programming-interview-questions-and-answers-62512c44f062
+
+Java 8 programs 
+1. Given a list of integers, find out all the even numbers that exist in the list using Stream functions?
+2. Given a list of integers, find out all the numbers starting with 1 using Stream functions?
+3. How to find duplicate elements in a given integers list in java using Stream functions
+4. Given the list of integers, find the first element of the list using Stream functions
+5. Given a list of integers, find the total number of elements present in the list using Stream functions?
+6. Given a list of integers, find the maximum value element present in it using Stream functions?
+
+7. Given a String, find the first non-repeated character in it using Stream functions?
+8. Given a String, find the first repeated character in it using Stream functions?
+9. Given a list of integers, sort all the values present in it using Stream functions?
+10. Given a list of integers, sort all the values present in it in descending order using Stream functions?
+11. Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
+12. How will you get the current date and time using Java 8 Date and Time API?
+13. Write a Java 8 program to concatenate two Streams
+14. Java 8 program to perform cube on list elements and filter numbers greater than 50.
+15. Write a Java 8 program to sort an array and then convert the sorted array into Stream?
+
+
+Configurations in properties file
+
+spring.application.name=
+server.port = 
+
+spring.datasource.url = jdbc:thin:oracle://@localhost:8080:dbname
+spring.datasource.username =
+spring.datasource.password=
+spring,datasource.driver-class-name=
+spring.jpa.database-platform = org.hibernate.oracle10g
+
+spring.jpa.hibernate-ddl = create
+spring.jpa.show-sql = true
+
+spring.jpa.h2.console.enable = true
+
+debug = true
+
+spring.servlet.multipart.max-file-size = 100MB
+spring.servlet.multipart.max-request-size = 100MB
+
+server.tomcat.max-swallow-size = 100MB
+
+spring.config.import = file://location
+
+spring.cloud.config.git.uri = git url
+
+management.endpoints.web.exposure.include = *
+
+info.endpoint.uri =
+
+resillence4j.retry.instances.classname.maxRetryAttempt = 5
+resillence4j.retry.instances.classname.waitDuration = 5s
+
+resillence4j.circuitbreaker.instances.classname
+
+eureka.client.register-with-eureka = false
+eureka.client.fetch-registry = false
+
+
+
+@Annotation
+
+@EnableEureka
+@EnableDiscoveryClient
+
+@EnableConfigServer
+@multipartFile
+@CircuitBreaker(name = "Any Name", fallbackMethod = "methodName u want to handle")
+@Retry(name= "name of circuitBreaker", fallbackMethod = "Method u want to handle")
+
+@ElementCollect(fetch = FetchType.EAGER)
+@CollectionTable(name = "name of the child table", joinColumn = @JoinColumn(name = "foreign key"))
+@Column(name = "columnName")
+
+@OneToMany(targetClass = , cascade = cascadeType.All)
+@JoinColumn(name = "foreign key name")
+
+
+
+
+
+
+
+
+
+
+
+

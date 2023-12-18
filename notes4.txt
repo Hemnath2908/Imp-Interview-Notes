@@ -1,0 +1,48 @@
+Spring boot security Ques: 
+1. What is spring security?
+	Spring security is the seperate module of spring framework that provides authentication and authorization
+	It also prevents from vulnerablities as CSRF [cross request forgery] 
+	@EnableWebSecurity annotation is used for spring security 
+
+2. features of spring security?
+	It support for authentication and authorization
+	JAAS[Java Authentication and Authorization service] is used for authentication services
+	Allow single sign on SSO that user can access multiple instance with single account[username and password]
+
+3. Spring security authentication and authorization?
+	Authentication - It verify the identity of user like username or password
+					Accessing with the credential
+	Authorization - who can access that site
+					Like Admin / User
+
+4. Authentication?
+	Knowledge Based Authentication:
+		Password
+		Pin
+		Personal Question
+	Easy to implement but Not fully safe
+	Possesion Based Authentication:
+		phone/Text Messagge
+		Access Token device
+	Multi Factor Authentication
+
+5. How spring boot Security internally wrks
+	Once user sends the request it will handled by the Authentication filter or security Filter by using security context and it will call Authentication Manager -> UserDetails -> and returns the response
+
+6. JWT 
+	JSON WEB Token
+	It is stateless 
+	stores information in client side 
+	suitable for microservices
+
+7. Session Token
+	statefull -> it will hold the information about the client
+	stores information in server side
+	suitable for monolithic 
+
+	
+		
+	
+				
+	
+	
