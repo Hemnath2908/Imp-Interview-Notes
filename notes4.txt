@@ -25,22 +25,152 @@ Spring boot security Ques:
 		phone/Text Messagge
 		Access Token device
 	Multi Factor Authentication
+	 Two way authentication
 
-5. How spring boot Security internally wrks
+5. core concepts of spring security [imp]
+	Authentication - Identify the person who u are, using credentials
+	Authorization - who can access
+	Principle - the one who authenticated becomes the principal
+	Granted Authority - Group or brunch of permissions allowed for the user
+	Role - Role assigned for the user for ex -> user / admin
+	
+	
+6. How spring boot Security internally wrks
 	Once user sends the request it will handled by the Authentication filter or security Filter by using security context and it will call Authentication Manager -> UserDetails -> and returns the response
+	
+	If we add security framework in springboot application, then it will create a security filter chain using security context and every incoming request will intercept by the security filter and then it will handled by the authentication manager and then it will call the authentication provider and verify the userdetails and return the response
 
-6. JWT 
+7. JWT 
 	JSON WEB Token
 	It is stateless 
 	stores information in client side 
 	suitable for microservices
 
-7. Session Token
+8. Session Token
 	statefull -> it will hold the information about the client
 	stores information in server side
 	suitable for monolithic 
 
+
+9. How will u implement the spring security in springboot app?
+	we need to add the dependency in pom.xml
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-security</artifactId>
+	</dependency>
 	
+	And also we need to add @EnableWebSecurity in main class. If i run the application it will automatically generate a password
+	I can also configure the username and password for the application by defining it in application.properties file
+	spring.security.user-name =
+	spring.security.user.password =
+	
+10. How spring security intercepts your request?
+	Because of filter of servlets
+	Filter -> it is a cross cutting concern which intercepts each and every request which passes to a certain servlets
+	servlets -> base line of springboot application - > springboot application is also a servlet application
+
+11. How to configure Authentication in Spring security?
+	
+12. How to configure authorization in spring security?
+
+
+Junit que & ans
+
+1. What is Junit ?
+	Java code  + unit testing
+	Junit is a testing framework, it is used for unit testing.It will automatically test ur java code.
+
+2. What are the annotations u used in Junit?
+	@SpringBootTest - It is the class level annotation. it create an application context and loads the full application
+	@Test - It is method level annotation. This should be public method of void return type can be run as a testcase
+	@Mock - if we dont want to hit the actual db then we can use @Mock
+	@InjectMock - Class which we want to call
+	@Before - This is used to do any preprocessing conditions before running ur testcases
+	
+3. what is mockito?
+	Mockito is java based mocking framework used for unit testing in springboot application
+	It is integrated with the support of Junit
+	Mock objects are proxy for the actual implementation
+<dependency>
+<groupId>org.mockito</groupId>
+<artifactId>mockito-junit-jupiter</artifactId>
+<scope>Test</scope>
+
+4. What is mocking objects?
+	It is the clone copy of the actual objects
+	If u dont want to hit the db for testcases it will helps to get the value by using stub.
+	we must define the when and thenReturn for the mock objects
+
+5. What is @Mock and @InjectMock
+	@Mock annotation creates a mock 
+	we create objects for the class which need to be tested and its methods to be invoked  using inject mock 
+	@InjectMock creates actual object and inject mocked dependencies into it
+	We create mocks for the dependencies which will not be present in the test environment and objects are dependent on it to complete the method call.
+	
+
+Caching : 
+	Redis -> Remote directory server. It is used for caching and act as abstract db 
+	@RedisHash("")  @EnableRedishRepositories   RedisTemplate
+	
+1. Redis 
+	It is a opensource, advance key value data store and cache
+	It is also referred as datastructure server.
+
+2. Redis stands for ?
+	Remote Dictionary Server
+	
+3.Redis different from other db?
+	Redis is a NOSQL, Opensource in-memory data structure store
+	It is very fast to retrive the data
+	It follows the principle of key-value store
+
+Apache Kafka :
+Steps : 
+	need to install zookeeper and kafka tool
+
+Project Setup :
+	Spring boot project
+	Kafka dependency in web
+	Controller to fetch msg from client
+	Producer who push these msgs to topic
+	Consumer to listen it
+	Application.properties to configure producer properties
+	Then u need to run the zookeeper and then to run the kakfa server 
+	loc : bin/
+	
+	Autowired -> KafkaTemplate -> Producer 
+	kafkaTemplate.send("",message)
+	@KafkaListner(topics = "", groupId = "")
+	
+	spring:
+		kafka:
+			producer:
+				bootstrap-servers: localhost:9092
+				key-serializer: org.apache.kafka.common.serialization.StringSerializer
+				value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+Internal working:
+	There will be a producer -> brokers/Topics -> Consumer    -> publish
+	All the brokers/Topics will be clustered..The Brokers were partitions
+	
+Kafka server default port is 9091
+Zookeeper default port is 2181
+
+
+Kubernates :
+
+1. What is Kubernates ?
+	Kubernates is an open source container orchestration tool. 
+	It handles task like scaling, service discovery, Fault tolerence and api gateway
+	Simply it is Container Management Tool
+	
+
+
+	
+
+	
+	
+
 		
 	
 				

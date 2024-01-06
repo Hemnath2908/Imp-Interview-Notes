@@ -100,6 +100,23 @@ Spring Boot Actuator ?
 	 localhost:9090/actuator/health / localhost:9090/actuator/info
 	  To exclude the endpoint 
 	  management.endpoints.web.exposure.exclude = bean
+
+Java 8 
+Collectors 
+	It is used to process the final stream. It will fold or convert the stream object into List set etc
+
+Collectors.toList()
+Collectors.toSet()
+Collectors.toCollection(LinkedList :: new)
+Collectors.toMap()
+
+Diff btw new ArrayList<>() and Arrays.asList()?
+Arrays.asList() is the fixed arrayList. we cannot able to add or remove the value once its created
+we can convert from an array to a fixed-size List object. This List is just a wrapper that makes the array available as a list. No data is copied or created.
+But we can modify the list by using  -> list.set(0,2);
+ArrayList<>() here we can add or remove the elements dynamically to the list.
+
+
 	  
 	  
 	  
