@@ -1,0 +1,21 @@
+Select * from school_marks_datas
+SELECT * INTO school_marks_datas_backup
+FROM school_marks_datas;
+SELECT table_name FROM information_schema.tables WHERE table_schema='cs_datazense_qa' And table_name like ('%school_marks_datas%')
+CREATE TABLE school_marks_datas_backup LIKE school_marks_datas;
+CREATE TABLE school_marks_datas_backup1 AS 
+TABLE school_marks_datas;
+
+ALTER TABLE school_marks_datas_backup ALTER COLUMN "NAME" SET NOT NULL;
+
+SELECT DISTINCT "NAME" school_marks_datas_backup
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE "NAME" IS NOT NULL
+
+
+Select * from cs_datazense_qa.school_marks_datas_backup
+
+UPDATE school_marks_datas_backup SET "NAME" = name_format
+
+SELECT DISTINCT column_name, table_name
+FROM INFORMATION_SCHEMA.school_marks_datas_backup
